@@ -155,6 +155,9 @@ Add export/download reports feature
 This project helped me understand how real-world productivity tools are built using browser extensions and backend services. It strengthened my understanding of Chrome APIs, event-driven programming, authentication, and full-stack development. This project served as a strong foundation for building more advanced productivity and analytics applications in the future.
 
 
+<img width="1918" height="975" alt="Image" src="https://github.com/user-attachments/assets/bfa62460-5515-440a-bd20-f197d4f4fc24" />
+
+
 
 
 
