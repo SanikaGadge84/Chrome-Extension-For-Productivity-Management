@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import preferencesRoutes from "./routes/preferences.js";
 
 import usageRoutes from "./routes/usageRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -32,7 +31,6 @@ app.use((req, res, next) => {
 
 app.use("/api/usage", usageRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/preferences", preferencesRoutes);
 
 app.use("/api/report", reportRoutes);
 app.use("/api/auth", authRoutes);

@@ -20,9 +20,18 @@ const blockedListDiv = document.getElementById("blocked-list");
 
 // Utils
 function formatTime(seconds) {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  return `${h}h ${m}m`;
+  if (seconds < 60) {
+    return "0 min";
+  }
+
+  const totalMinutes = Math.floor(seconds / 60);
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  }
+  return `${minutes}m`;
 }
 
 async function getToken() {
@@ -115,6 +124,7 @@ async function loadBlockedSites() {
 }
 
 // DASHBOARD
+// DASHBOARD
 async function loadDashboard() {
   const today = new Date().toISOString().split("T")[0];
   const { userId } = await chrome.storage.local.get("userId");
@@ -125,19 +135,29 @@ async function loadDashboard() {
   const data = await chrome.storage.local.get(key);
   const siteData = data[key] || {};
 
-  const total = Object.values(siteData).reduce((a, b) => a + b, 0);
+  const MIN_VISIBLE_SECONDS = 60;
 
-  totalTimeDiv.textContent = "Total Time: " + formatTime(total);
+  let total = 0; // ✅ FIX: compute total manually
+
   siteListDiv.innerHTML = "";
 
   Object.entries(siteData).forEach(([site, seconds]) => {
-    if (seconds < 60) return;
+    if (seconds < MIN_VISIBLE_SECONDS) return;
+
+    total += seconds; // ✅ only count visible sites
 
     const div = document.createElement("div");
     div.className = "site-card";
     div.textContent = `${site} — ${formatTime(seconds)}`;
     siteListDiv.appendChild(div);
   });
+
+  // If nothing meaningful yet
+  if (total === 0) {
+    totalTimeDiv.textContent = "Total Time: 0 min";
+  } else {
+    totalTimeDiv.textContent = "Total Time: " + formatTime(total);
+  }
 
   loadBlockedSites();
 }
