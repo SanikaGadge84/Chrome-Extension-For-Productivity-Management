@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Productivity Tracker</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- 🔐 AUTH BOX -->
+  <div id="auth-box">
+    <h2>Productivity Tracker</h2>
+
+    <input id="email" type="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
+
+    <button id="login-btn">Login</button>
+    <button id="register-btn">Register</button>
+
+    <p id="auth-error"></p>
+  </div>
+
+  <!-- 📊 DASHBOARD -->
+  <div id="dashboard" style="display:none;">
+
+    <div class="header">
+      <h2>Today’s Usage</h2>
+      <button id="logout-btn">Logout</button>
+    </div>
+<div id="productivity-rate"></div>
+
+    <!-- ⏱ TOTAL TIME -->
+    <div id="total-time" class="card">
+      Total Time: 0h 0m
+    </div>
+
+    <!-- 🌐 SITE USAGE -->
+    <div class="card">
+      <h3>Tracked Sites</h3>
+      <div id="site-list" class="list"></div>
+    </div>
+
+    <!-- 🚫 BLOCK SITE -->
+    <div class="card">
+      <h3>Block a Website</h3>
+      <input id="new-block" placeholder="example.com" />
+      <button id="block-btn">Block</button>
+    </div>
+
+    <!-- 🚫 BLOCKED SITES -->
+    <div class="card">
+      <h3>Blocked Websites</h3>
+      <div id="blocked-list" class="list"></div>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
